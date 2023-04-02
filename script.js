@@ -41,6 +41,72 @@ clearButton.addEventListener('click', clearAll);
 const backspaceButton = document.querySelector('#backspace');
 backspaceButton.addEventListener('click', useBackspace);
 
+/* Add keyboard support */
+function keydownHelper(button, fun)
+{
+    button.classList.add('active');
+    fun();
+}
+
+function keyUpHelper(button)
+{
+    button.classList.remove('active');
+}
+
+document.addEventListener('keydown', (event) => {
+    if ("0123456789".includes(event.key)) // digits 0-9
+        keydownHelper(digitButtons[event.key].DOM, () => updateOperands(digitButtons[event.key].digit));
+
+    else if (event.key === "+")
+        keydownHelper(basicOperatorButtons["+"], () => updateBasicOperator("+"));
+
+    else if (event.key === "-")
+        keydownHelper(basicOperatorButtons["+"], () => updateBasicOperator("-"));
+
+    else if (event.key === "/")
+        keydownHelper(basicOperatorButtons["÷"], () => updateBasicOperator("÷"));
+
+    else if (event.key === "*")
+        keydownHelper(basicOperatorButtons["×"], () => updateBasicOperator("×"));
+
+    else if (event.key === "=" || event.key === "Enter")
+        keydownHelper(specialOperatorButtons["="], evaluateExpression);
+
+    else if (event.key === "." || event.key === ",")
+        keydownHelper(specialOperatorButtons["."], addDeicmalPoint);
+
+    else if (event.key === "Backspace" || event.key === "Delete")
+        keydownHelper(backspaceButton, useBackspace);
+});
+
+document.addEventListener('keyup', (event) => {
+    if ("0123456789".includes(event.key))
+        keyUpHelper(digitButtons[event.key].DOM);
+    
+    else if (event.key === "+")
+        keyUpHelper(basicOperatorButtons["+"]);
+
+    else if (event.key === "-")
+        keyUpHelper(basicOperatorButtons["+"]);
+
+    else if (event.key === "/")
+        keyUpHelper(basicOperatorButtons["÷"]);
+
+    else if (event.key === "*")
+        keyUpHelper(basicOperatorButtons["×"]);
+
+    else if (event.key === "=" || event.key === "Enter")
+        keyUpHelper(specialOperatorButtons["="]);
+
+    else if (event.key === "." || event.key === ",")
+        keyUpHelper(specialOperatorButtons["."]);
+
+    else if (event.key === "Backspace" || event.key === "Delete")
+        keyUpHelper(backspaceButton);
+
+});
+
+
 /* functions */
 // Given two numbers and an operator returns the result of calculations
 function operate(num1, num2, operator)
@@ -203,6 +269,7 @@ function addDecimalPointHelper(operand)
 // Updates display of calculator with current operands and operators
 function updateDisplay()
 {
+
     // Add left operand
     textDisplay.value = leftOperand;
 

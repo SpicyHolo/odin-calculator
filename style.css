@@ -83,6 +83,11 @@ button.calc-button:hover {
 }
 
 button.calc-button:active {
+    box-shadow: 0 1px #a5a39c;
+    transform: translateY(4px);
+}
+
+button.active {
     background-color: #f7f3e7;
     box-shadow: 0 1px #a5a39c;
     transform: translateY(4px);
@@ -99,4 +104,13 @@ button.small-button {
 
 footer {
     text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px;
+    display: flex;
+    gap: 16px;
+}
+
+a {
+    color: inherit;
 }
