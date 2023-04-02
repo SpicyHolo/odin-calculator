@@ -83,6 +83,7 @@ button.calc-button:hover {
 }
 
 button.calc-button:active {
+    background-color: #f7f3e7;
     box-shadow: 0 1px #a5a39c;
     transform: translateY(4px);
 }
@@ -94,6 +95,7 @@ button.calc-button:focus {
 button.small-button {
     aspect-ratio: 2 / 1;
 }
+
 
 footer {
     text-align: center;
